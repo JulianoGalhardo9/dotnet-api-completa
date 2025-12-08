@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using ProductClientHub.Communication.Requests;
+using ProductClientHub.Communication.Responses;
+
 
 namespace ProductClientHub.API.Controllers;
-
 [ApiController]    
 [Route("api/[controller]")]
 public class ClientsController : ControllerBase
 {
     [HttpPost]
-    public IActionResult Register()
+    [ProducesResponseType(typeof(ResponseClientJsonClass), StatusCodes.Status201Created)]
+    public IActionResult Register([FromBody] RequestClientJson request)
     {
         return Ok();
     }
@@ -26,7 +30,7 @@ public class ClientsController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    public IActionResult GetById(Guid id)
+    public IActionResult GetById([FromRoute] Guid id)
     {
         return Ok();
     }
