@@ -5,19 +5,35 @@ using ProductClientHub.Communication.Responses;
 using ProductClientHub.API.UseCases.Clients.Register;
 
 namespace ProductClientHub.API.Controllers;
-[ApiController]    
+[ApiController]
 [Route("api/[controller]")]
 public class ClientsController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponseClientJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseClientJson), StatusCodes.Status400BadRequest)]
     public IActionResult Register([FromBody] RequestClientJson request)
     {
-        var useCase = new RegisterClientUseCase();
+        try
+        {
+            var useCase = new RegisterClientUseCase();
 
-        var response = useCase.Execute(request);
+            var response = useCase.Execute(request);
 
-        return Created(string.Empty, response);
+            return Created(string.Empty, response);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new ResponsesErrorMessagesJson(ex.Message));
+        }
+        catch
+        {
+            return StatusCode(
+                StatusCodes.Status500InternalServerError,
+                new ResponsesErrorMessagesJson("Erro desconhecido")
+);
+
+        }
     }
 
     [HttpPut]
