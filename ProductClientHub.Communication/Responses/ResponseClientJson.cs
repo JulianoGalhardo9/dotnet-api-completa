@@ -1,6 +1,6 @@
 ﻿namespace ProductClientHub.Communication.Responses
 {
-	public class ResponseClientJsonClass
+	public class ResponseClientJson
 	{
 		public Guid Id { get; set; }
 

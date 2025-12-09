@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using ProductClientHub.Communication.Requests;
 using ProductClientHub.Communication.Responses;
-
+using ProductClientHub.API.UseCases.Clients.Register;
 
 namespace ProductClientHub.API.Controllers;
 [ApiController]    
@@ -10,10 +10,14 @@ namespace ProductClientHub.API.Controllers;
 public class ClientsController : ControllerBase
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseClientJsonClass), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseClientJson), StatusCodes.Status201Created)]
     public IActionResult Register([FromBody] RequestClientJson request)
     {
-        return Ok();
+        var useCase = new RegisterClientUseCase();
+
+        var response = useCase.Execute(request);
+
+        return Created(string.Empty, response);
     }
 
     [HttpPut]
