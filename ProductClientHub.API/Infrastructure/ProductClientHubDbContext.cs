@@ -1,11 +1,18 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using ProductClientHub.API.Entities;
+
 namespace ProductClientHub.API.Infrastructure
 {
-	public class ProductClientHubDbContext
+	public class ProductClientHubDbContext : DbContext
 	{
-		public ProductClientHubDbContext()
-		{
-		}
-	}
+		public DbSet<Client> Clients { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=/Users/julianogalhardo/Documents/ProductClientHubDB.db");
+        }
+    }
 }
 
