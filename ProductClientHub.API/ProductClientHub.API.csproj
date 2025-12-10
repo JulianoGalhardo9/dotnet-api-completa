@@ -25,6 +25,7 @@
     <None Remove="UseCases\Clients\" />
     <None Remove="UseCases\Clients\Register\" />
     <None Remove="Filters\" />
+    <None Remove="Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -32,6 +33,7 @@
     <Folder Include="UseCases\Clients\" />
     <Folder Include="UseCases\Clients\Register\" />
     <Folder Include="Filters\" />
+    <Folder Include="Entities\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProductClientHub.Communication\ProductClientHub.Communication.csproj">
